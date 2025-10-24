@@ -1,0 +1,4 @@
+tmdb:
+  api:
+    url: https://api.themoviedb.org/3
+    key: 
