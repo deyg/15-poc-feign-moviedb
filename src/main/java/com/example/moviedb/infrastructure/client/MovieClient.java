@@ -11,14 +11,12 @@ public interface MovieClient {
 
     @GetMapping("/movie/popular")
     MoviePage getPopularMovies(
-            @RequestParam("api_key") String apiKey,
             @RequestParam("language") String language,
             @RequestParam("page") int page
     );
 
     @GetMapping("/search/movie")
     MoviePage searchMovies(
-            @RequestParam("api_key") String apiKey,
             @RequestParam("language") String language,
             @RequestParam("query") String query
     );

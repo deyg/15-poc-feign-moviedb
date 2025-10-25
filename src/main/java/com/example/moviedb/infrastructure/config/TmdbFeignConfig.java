@@ -11,8 +11,13 @@ import org.springframework.util.StringUtils;
 public class TmdbFeignConfig {
 
     @Bean
-    public RequestInterceptor tmdbAuthInterceptor(@Value("${tmdb.api.token:}") String apiToken) {
+    public RequestInterceptor tmdbAuthInterceptor(
+            @Value("${tmdb.api.key:}") String apiKey,
+            @Value("${tmdb.api.token:}") String apiToken) {
         return template -> {
+            if (StringUtils.hasText(apiKey)) {
+                template.query("api_key", apiKey);
+            }
             if (StringUtils.hasText(apiToken)) {
                 template.header(HttpHeaders.AUTHORIZATION, "Bearer " + apiToken);
             }
