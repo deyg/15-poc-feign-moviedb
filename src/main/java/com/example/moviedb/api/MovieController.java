@@ -1,11 +1,13 @@
 package com.example.moviedb.api;
 
 import com.example.moviedb.api.response.MovieResponse;
+import com.example.moviedb.domain.model.Movie;
 import com.example.moviedb.domain.service.MovieService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/movies")
@@ -28,5 +30,11 @@ public class MovieController {
                                       @RequestParam(defaultValue = "pt-BR") String language) {
         var result = movieService.searchMovies(language, query);
         return new MovieResponse(result.page(), result.results());
+    }
+
+    @GetMapping("/{id}")
+    public Movie getMovieById(@PathVariable int id,
+                              @RequestParam(defaultValue = "pt-BR") String language) {
+        return movieService.getMovieById(language, id);
     }
 }

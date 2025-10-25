@@ -1,9 +1,11 @@
 package com.example.moviedb.infrastructure.client;
 
+import com.example.moviedb.domain.model.Movie;
 import com.example.moviedb.domain.model.MoviePage;
 import com.example.moviedb.infrastructure.config.TmdbFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(name = "movieClient", url = "${tmdb.api.url}", configuration = TmdbFeignConfig.class)
@@ -19,5 +21,11 @@ public interface MovieClient {
     MoviePage searchMovies(
             @RequestParam("language") String language,
             @RequestParam("query") String query
+    );
+
+    @GetMapping("/movie/{movieId}")
+    Movie getMovieById(
+            @PathVariable("movieId") int movieId,
+            @RequestParam("language") String language
     );
 }

@@ -1,5 +1,6 @@
 package com.example.moviedb.domain.service;
 
+import com.example.moviedb.domain.model.Movie;
 import com.example.moviedb.domain.model.MoviePage;
 import com.example.moviedb.infrastructure.client.MovieClient;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,9 @@ public class MovieService {
 
     public MoviePage searchMovies(String language, String query) {
         return movieClient.searchMovies(language, query);
+    }
+
+    public Movie getMovieById(String language, int movieId) {
+        return movieClient.getMovieById(movieId, language);
     }
 }
