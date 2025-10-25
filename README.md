@@ -1,5 +1,7 @@
 # Movie DB Feign
 
+> Antes de rodar esta PoC, crie uma conta gratuita no [The Movie Database](https://www.themoviedb.org), gere uma API Key v3 e um API Read Access Token v4 e configure as variaveis `TMDB_API_KEY` e `TMDB_API_TOKEN` conforme descrito na secao de configuracao (elas sao as unicas lidas pelo `application.yml`).
+
 PoC em Spring Boot 3.3 + Java 21 que expoe uma API HTTP para consultar filmes populares e buscas do [The Movie Database (TMDb)](https://developer.themoviedb.org/). A integracao com o TMDb e feita via Spring Cloud OpenFeign e ja inclui interceptor para autenticacao por API key e/ou Bearer token.
 
 ## Arquitetura rapida
@@ -14,16 +16,18 @@ PoC em Spring Boot 3.3 + Java 21 que expoe uma API HTTP para consultar filmes po
 - Conta no TMDb com **API Key** (v3) e/ou **API Read Access Token** (v4)
 
 ## Configuracao das variaveis
-O projeto aceita tanto maiusculas quanto minusculas gracas aos placeholders `${TMDB_API_KEY:${TMDB_KEY:}}` e `${TMDB_API_TOKEN:${TMDB_TOKEN:}}`.
+`application.yml` agora requer apenas duas variaveis:
+- `TMDB_API_KEY` — sua API Key v3.
+- `TMDB_API_TOKEN` — seu API Read Access Token v4.
 
 ```powershell
 # PowerShell (valido para a sessao atual)
-$env:TMDB_KEY = '<sua-api-key>'
-$env:TMDB_TOKEN = '<seu-token-bearer>'
+$env:TMDB_API_KEY = '<sua-api-key>'
+$env:TMDB_API_TOKEN = '<seu-token-bearer>'
 
 # Persistir no Windows (abre um novo terminal depois)
-setx TMDB_KEY "<sua-api-key>"
-setx TMDB_TOKEN "<seu-token-bearer>"
+setx TMDB_API_KEY "<sua-api-key>"
+setx TMDB_API_TOKEN "<seu-token-bearer>"
 ```
 
 ```bash
